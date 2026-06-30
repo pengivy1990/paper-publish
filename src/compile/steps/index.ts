@@ -1,4 +1,5 @@
 import { ConcatenateTextStep } from "./concatenate-text";
+import { ExportToWordStep } from "./export-to-word";
 import { PrependTitleStep } from "./prepend-title";
 import { RemoveCommentsStep } from "./remove-comments";
 import { RemoveLinksStep } from "./remove-links";
@@ -10,6 +11,7 @@ import { AddFrontmatterStep } from "./add-frontmatter";
 export const BUILTIN_STEPS = [
   AddFrontmatterStep,
   ConcatenateTextStep,
+  ExportToWordStep,
   PrependTitleStep,
   RemoveCommentsStep,
   RemoveLinksStep,

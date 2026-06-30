@@ -1,11 +1,11 @@
 {
   "id": "paper-publish",
   "name": "Paper Publish",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "minAppVersion": "1.0",
   "description": "Write, manage, and publish academic papers in Obsidian.",
   "author": "pengivy",
   "authorUrl": "",
   "fundingUrl": "",
-  "isDesktopOnly": false
+  "isDesktopOnly": true
 }

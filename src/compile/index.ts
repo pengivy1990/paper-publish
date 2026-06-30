@@ -330,6 +330,20 @@ export const DEFAULT_WORKFLOWS: Record<string, SerializedWorkflow> = {
           "open-after": true,
         },
       },
+      {
+        id: "export-to-word",
+        optionValues: {
+          output: "$1.docx",
+          "pandoc-path": "pandoc",
+          "use-crossref": true,
+          "auto-number-equations": true,
+          "table-equations": true,
+          citeproc: false,
+          "reference-doc": "",
+          bibliography: "",
+          csl: "",
+        },
+      },
     ],
   },
 };
