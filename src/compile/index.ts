@@ -324,6 +324,10 @@ export const DEFAULT_WORKFLOWS: Record<string, SerializedWorkflow> = {
         },
       },
       {
+        id: "strip-latex-tags",
+        optionValues: {},
+      },
+      {
         id: "write-to-note",
         optionValues: {
           target: "manuscript.md",

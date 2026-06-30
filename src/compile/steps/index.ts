@@ -5,6 +5,7 @@ import { RemoveCommentsStep } from "./remove-comments";
 import { RemoveLinksStep } from "./remove-links";
 import { RemoveStrikethroughsStep } from "./remove-strikethroughs";
 import { StripFrontmatterStep } from "./strip-frontmatter";
+import { StripLatexTagsStep } from "./strip-latex-tags";
 import { WriteToNoteStep } from "./write-to-note";
 import { AddFrontmatterStep } from "./add-frontmatter";
 
@@ -17,5 +18,6 @@ export const BUILTIN_STEPS = [
   RemoveLinksStep,
   RemoveStrikethroughsStep,
   StripFrontmatterStep,
+  StripLatexTagsStep,
   WriteToNoteStep,
 ];
