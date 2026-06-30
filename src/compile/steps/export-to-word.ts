@@ -86,6 +86,14 @@ export const ExportToWordStep = makeBuiltinStep({
         type: CompileStepOptionType.Text,
         default: "",
       },
+      {
+        id: "open-after",
+        name: "Open after export",
+        description:
+          "Automatically open the generated .docx file after export.",
+        type: CompileStepOptionType.Boolean,
+        default: true,
+      },
     ],
   },
   async compile(
@@ -153,6 +161,14 @@ export const ExportToWordStep = makeBuiltinStep({
     try {
       await runPandoc(pandocPath, args);
       new Notice(`Exported Word document: ${outputPath}`);
+      const openAfter = context.optionValues["open-after"] !== false;
+      if (openAfter) {
+        try {
+          await openFile(outputAbsolutePath);
+        } catch {
+          // Non-critical — don't fail the step if opening fails.
+        }
+      }
     } finally {
       try {
         await context.app.vault.adapter.remove(tempMdPath);
@@ -213,6 +229,20 @@ function toSystemPath(basePath: string, relativePath: string): string {
 function isAbsoluteSystemPath(path: string): boolean {
   if (Platform.isWin) return /^[a-zA-Z]:[\\/]/.test(path) || path.startsWith("\\\\");
   return path.startsWith("/");
+}
+
+function openFile(filePath: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const nodeRequire: NodeRequire | undefined = (window as any).require;
+    if (!nodeRequire) { reject(); return; }
+    const { exec } = nodeRequire("child_process") as typeof import("child_process");
+    const cmd = Platform.isWin
+      ? `start "" "${filePath}"`
+      : Platform.isMacOS
+        ? `open "${filePath}"`
+        : `xdg-open "${filePath}"`;
+    exec(cmd, (error) => (error ? reject(error) : resolve()));
+  });
 }
 
 function runPandoc(command: string, args: string[]): Promise<void> {

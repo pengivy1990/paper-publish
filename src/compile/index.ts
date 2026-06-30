@@ -342,6 +342,7 @@ export const DEFAULT_WORKFLOWS: Record<string, SerializedWorkflow> = {
           "use-crossref": true,
           "auto-number-equations": true,
           "table-equations": true,
+          "open-after": true,
           citeproc: false,
           "reference-doc": "",
           bibliography: "",
