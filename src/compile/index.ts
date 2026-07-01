@@ -324,10 +324,6 @@ export const DEFAULT_WORKFLOWS: Record<string, SerializedWorkflow> = {
         },
       },
       {
-        id: "strip-latex-tags",
-        optionValues: {},
-      },
-      {
         id: "write-to-note",
         optionValues: {
           target: "manuscript.md",
@@ -339,9 +335,6 @@ export const DEFAULT_WORKFLOWS: Record<string, SerializedWorkflow> = {
         optionValues: {
           output: "$1.docx",
           "pandoc-path": "pandoc",
-          "use-crossref": true,
-          "auto-number-equations": true,
-          "table-equations": true,
           "open-after": true,
           citeproc: false,
           "reference-doc": "",

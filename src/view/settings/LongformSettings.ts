@@ -84,20 +84,6 @@ export class LongformSettingsTab extends PluginSettingTab {
         });
       });
 
-    new Setting(containerEl).setName("Publish").setHeading();
-
-    new Setting(containerEl)
-      .setName("Number equations in DOCX")
-      .setDesc(
-        "When enabled, passes --filter pandoc-crossref -M autoEqnNumbers to pandoc. All $$...$$ equations will be auto-numbered. Requires pandoc-crossref."
-      )
-      .addToggle((cb) => {
-        cb.setValue(settings.numberFormulas);
-        cb.onChange((value) => {
-          pluginSettings.update((s) => ({ ...s, numberFormulas: value }));
-        });
-      });
-
     new Setting(containerEl).setName("Compile").setHeading();
 
     new Setting(containerEl)

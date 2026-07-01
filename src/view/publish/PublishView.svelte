@@ -119,17 +119,13 @@
         } else if (fmt === "docx") {
           const mdPath = `${outputDir}/${safeName}_temp.md`;
           const docxPath = `${outputDir}/${safeName}.docx`;
-          const docxContent = settings?.numberFormulas
-            ? "---\nautoEqnNumbers: true\n---\n\n" + content
-            : content;
-          await app.vault.adapter.write(mdPath, docxContent);
+          await app.vault.adapter.write(mdPath, content);
           try {
             const { execSync } = require("child_process");
             const base = ((app.vault.adapter as any).basePath || (app.vault.adapter as any).path || "").replace(/\\/g, "/");
             const absMd = `${base}/${mdPath}`.replace(/\/+/g, "/");
             const absDocx = `${base}/${docxPath}`.replace(/\/+/g, "/");
-            const filter = settings?.numberFormulas ? " --filter pandoc-crossref" : "";
-            execSync(`"${settings?.pandocPath || "pandoc"}" "${absMd}" -f markdown -t docx${filter} -o "${absDocx}"`);
+            execSync(`"${"pandoc"}" "${absMd}" -f markdown -t docx -o "${absDocx}"`);
             await app.vault.adapter.remove(mdPath);
             results.push(docxPath);
           } catch {

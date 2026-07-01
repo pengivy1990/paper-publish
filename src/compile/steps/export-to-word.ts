@@ -11,7 +11,7 @@ export const ExportToWordStep = makeBuiltinStep({
   description: {
     name: "Export to Word",
     description:
-      "Exports the compiled manuscript to a Word .docx file using Pandoc, with equation numbering via pandoc-crossref.",
+      "Exports the compiled manuscript to a Word .docx file using Pandoc.",
     availableKinds: [CompileStepKind.Manuscript],
     options: [
       {
@@ -29,30 +29,6 @@ export const ExportToWordStep = makeBuiltinStep({
           "Path to pandoc. Usually 'pandoc' works if Pandoc is installed and available in PATH.",
         type: CompileStepOptionType.Text,
         default: "pandoc",
-      },
-      {
-        id: "use-crossref",
-        name: "Use pandoc-crossref",
-        description:
-          "Enable equation, figure, and table numbering with pandoc-crossref.",
-        type: CompileStepOptionType.Boolean,
-        default: true,
-      },
-      {
-        id: "auto-number-equations",
-        name: "Auto-number display equations",
-        description:
-          "If enabled, display equations without explicit {#eq:...} labels will also be numbered.",
-        type: CompileStepOptionType.Boolean,
-        default: true,
-      },
-      {
-        id: "table-equations",
-        name: "Use table layout for equations",
-        description:
-          "Use pandoc-crossref tableEqns mode. This is usually better for Word-style equation centering and right-side numbering.",
-        type: CompileStepOptionType.Boolean,
-        default: true,
       },
       {
         id: "citeproc",
@@ -122,10 +98,6 @@ export const ExportToWordStep = makeBuiltinStep({
 
     const pandocPath =
       (context.optionValues["pandoc-path"] as string)?.trim() || "pandoc";
-    const useCrossref = context.optionValues["use-crossref"] === true;
-    const autoNumberEquations =
-      context.optionValues["auto-number-equations"] === true;
-    const tableEquations = context.optionValues["table-equations"] === true;
     const useCiteproc = context.optionValues["citeproc"] === true;
     const referenceDoc = (context.optionValues["reference-doc"] as string)?.trim() || "";
     const bibliography = (context.optionValues["bibliography"] as string)?.trim() || "";
@@ -140,14 +112,6 @@ export const ExportToWordStep = makeBuiltinStep({
       "-o",
       outputAbsolutePath,
     ];
-
-    if (useCrossref) {
-      args.push("--filter", "pandoc-crossref");
-      if (tableEquations) args.push("-M", "tableEqns=true");
-      if (autoNumberEquations) args.push("-M", "autoEqnLabels=true");
-      args.push("-M", "eqnPrefix=式");
-      args.push("-M", "linkReferences=true");
-    }
 
     if (useCiteproc) args.push("--citeproc");
 

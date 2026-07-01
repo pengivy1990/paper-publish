@@ -101,7 +101,6 @@ export interface PaperPublishSettings {
   fallbackWaitTime: number;
   writeProperty: boolean;
   outputDir: string;
-  numberFormulas: boolean;
   // DEPRECATED. To be removed in future, needed now for migrations.
   projects: {
     [path: string]: {
@@ -132,7 +131,6 @@ export const DEFAULT_SETTINGS: PaperPublishSettings = {
   sceneTemplate: null,
   writeProperty: false,
   outputDir: "",
-  numberFormulas: false,
   projects: {},
   waitForSync: false,
   fallbackWaitEnabled: true,
@@ -161,7 +159,6 @@ export const TRACKED_SETTINGS_PATHS: (keyof PaperPublishSettings)[] = [
   "fallbackWaitTime",
   "writeProperty",
   "outputDir",
-  "numberFormulas",
 ];
 
 export const PASSTHROUGH_SAVE_SETTINGS_PATHS: (keyof PaperPublishSettings)[] =
